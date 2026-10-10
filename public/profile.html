@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A Service - Ask and Answer</title>
+    <!-- Локальное подключение Bootstrap и собственных стилей -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-light bg-light mb-4 border-bottom">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AskMe</a>
+            <form class="d-flex mx-auto w-50">
+                <input class="form-control me-2" type="search" placeholder="Поиск вопросов..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Найти</button>
+            </form>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <a href="login.html" class="text-decoration-none">Log in</a> | 
+                    <a href="signup.html" class="text-decoration-none">Sign up</a>
+                </div>
+                <a href="ask.html" class="btn btn-primary">Задать вопрос</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент страницы -->
+    <div class="container flex-grow-1">
+        <div class="row">
+            <!-- Центральная колонка (main) -->
+            <main class="col-lg-9">
+                <main class="col-lg-9">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4">Настройки профиля</h2>
+            
+            <!-- Пример сообщения об успешном сохранении формы -->
+            <div class="alert alert-success" role="alert">
+                Ваши данные успешно обновлены!
+            </div>
+
+            <form>
+                <!-- Блок с текущей аватаркой пользователя[cite: 1] -->
+                <div class="mb-4 d-flex align-items-center">
+                    <img src="https://via.placeholder.com/100" class="rounded-circle me-4" alt="Текущий аватар" width="100" height="100">
+                    <div class="flex-grow-1">
+                        <label for="profileAvatar" class="form-label">Изменить аватар</label>
+                        <input class="form-control" type="file" id="profileAvatar">
+                        <!-- Подсказка под полем загрузки файла[cite: 1] -->
+                        <div class="form-text">Поддерживаются форматы JPG и PNG. Максимальный размер 2 МБ.</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="profileLogin" class="form-label">Логин</label>
+                    <input type="text" class="form-control" id="profileLogin" value="ilya_silin" disabled>
+                    <div class="form-text">К сожалению, логин изменить нельзя.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="profileEmail" class="form-label">Email адрес</label>
+                    <input type="email" class="form-control" id="profileEmail" value="ilya@bmstu.ru">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="profilePassword" class="form-label">Новый пароль</label>
+                    <input type="password" class="form-control" id="profilePassword" placeholder="Оставьте пустым, если не хотите менять">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+</main>
+            </main>
+
+            <!-- Правая колонка (sidebar) -->
+            <aside class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-header">Popular tags</div>
+                    <div class="card-body">
+                        <span class="badge bg-secondary">python</span>
+                        <span class="badge bg-secondary">c++</span>
+                        <span class="badge bg-secondary">git</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Best members</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Mr. Freeman</li>
+                        <li class="list-group-item">Dr. House</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-auto text-center">
+        <div class="container">
+            <span>&copy; 2026 VK Edu Web Development</span>
+        </div>
+    </footer>
+
+    <!-- Локальное подключение скриптов Bootstrap -->
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
