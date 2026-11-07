@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="mb-4">Новый вопрос</h2>
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Заголовок</label>
+            <input type="text" class="form-control" placeholder="Например: Как отцентрировать div?">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Текст вопроса</label>
+            <textarea class="form-control" rows="5" placeholder="Опишите вашу проблему..."></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Теги</label>
+            <input type="text" class="form-control" placeholder="html, css, bootstrap">
+        </div>
+        <button type="submit" class="btn btn-success">Опубликовать</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>Вопросы по тегу: #{{ tag }}</h2>
+    </div>
+
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'question' question.id %}" class="text-decoration-none">{{ question.title }}</a>
+                </h5>
+                <p class="card-text">{{ question.text }}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+    <nav aria-label="Page navigation" class="mt-4">
+      <ul class="pagination">
+
+        {% if questions.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ questions.previous_page_number }}">Назад</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Назад</a>
+          </li>
+        {% endif %}
+
+        {% for p in questions.paginator.page_range %}
+          {% if questions.number == p %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% if questions.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ questions.next_page_number }}">Вперед</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Вперед</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+{% endblock %}

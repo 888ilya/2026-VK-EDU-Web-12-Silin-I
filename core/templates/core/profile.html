@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Только контент профиля -->
+    <h2 class="mb-4">Настройки профиля</h2>
+    <form>
+        <div class="row mb-3">
+            <div class="col-md-2">
+                <!-- Картинка загружается через static -->
+                <img src="{% static 'img/avatar.png' %}" class="img-thumbnail" alt="Аватар">
+            </div>
+            <div class="col-md-10">
+                <input type="file" class="form-control mb-3">
+                <input type="text" class="form-control mb-3" value="pupkin_junior">
+                <input type="email" class="form-control mb-3" value="pupkin@mail.ru">
+                <button type="submit" class="btn btn-success">Сохранить</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

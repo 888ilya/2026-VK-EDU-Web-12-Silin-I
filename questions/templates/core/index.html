@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Новые вопросы</h2>
+
+</div>
+
+{% for question in questions %}
+<div class="card mb-3">
+    <div class="card-body d-flex">
+        <div class="d-flex flex-column align-items-center me-3" style="min-width: 80px;">
+            <img src="{% static 'img/avatar.png' %}" class="rounded mb-2" alt="Avatar" width="60">
+            <input type="number" class="form-control form-control-sm text-center" value="5" readonly>
+        </div>
+        <div class="flex-grow-1">
+            <h5 class="card-title">
+                <a href="{% url 'question' question.id %}" class="text-decoration-none">{{ question.title }}</a>
+            </h5>
+            <p class="card-text">{{ question.text }}</p>
+            
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                    <a href="{% url 'tag' 'python' %}" class="badge bg-secondary text-decoration-none">python</a>
+                    <a href="{% url 'tag' 'django' %}" class="badge bg-secondary text-decoration-none">django</a>
+                </div>
+                <small class="text-muted">Ответов: 3</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+    <nav aria-label="Page navigation" class="mt-4">
+      <ul class="pagination">
+
+        {% if questions.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ questions.previous_page_number }}">Назад</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Назад</a>
+          </li>
+        {% endif %}
+
+        {% for p in questions.paginator.page_range %}
+          {% if questions.number == p %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% if questions.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ questions.next_page_number }}">Вперед</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Вперед</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+{% endblock %}
