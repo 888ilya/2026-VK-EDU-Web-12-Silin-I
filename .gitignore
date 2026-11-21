@@ -1,8 +1,7 @@
-# Виртуальное окружение
+
 venv/
 .venv/
 
-# Python и Django
 __pycache__/
 *.pyc
 db.sqlite3
@@ -10,10 +9,10 @@ db.sqlite3
 media/
 static/
 
-# Настройки IDE и ОС
 .idea/
 .vscode/
 .DS_Store
 
-# Переменные окружения
 .env
+.env.docker
+.env.local
