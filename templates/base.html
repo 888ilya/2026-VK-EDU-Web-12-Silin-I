@@ -19,12 +19,33 @@
                 <input class="form-control me-2" type="search" placeholder="Поиск вопросов..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Найти</button>
             </form>
-            <div class="d-flex align-items-center">
-                <div class="me-3">
-                    <a href="{% url 'login' %}" class="text-decoration-none">Log in</a> | 
-                    <a href="{% url 'signup' %}" class="text-decoration-none">Sign up</a>
-                </div>
-                <a href="{% url 'ask' %}" class="btn btn-primary">Задать вопрос</a>
+            <div class="d-flex align-items-center gap-3">
+                {% if user.is_authenticated %}
+                    <div class="d-flex align-items-center gap-2">
+                        {% if user.profile.avatar %}
+                            <img src="{{ user.profile.avatar.url }}" alt="Avatar" width="36" height="36" class="rounded-circle object-fit-cover">
+                        {% else %}
+                            <img src="{% static 'img/avatar.png' %}" alt="Avatar" width="36" height="36" class="rounded-circle object-fit-cover">
+                        {% endif %}
+                        <a href="{% url 'profile' %}" class="text-decoration-none fw-bold">
+                            {{ user.first_name|default:user.username }}
+                        </a>
+                        <form action="{% url 'logout' %}" method="post" class="d-inline m-0">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Выйти</button>
+                        </form>
+                    </div>
+                    <a href="{% url 'ask' %}" class="btn btn-primary">Задать вопрос</a>
+                {% else %}
+                    <div>
+                        <a href="{% url 'login' %}?next={{ request.get_full_path }}" class="text-decoration-none">Log in</a> | 
+                        <a href="{% url 'signup' %}" class="text-decoration-none">Sign up</a>
+                    </div>
+                    <span class="d-inline-block" tabindex="0" title="Войдите, чтобы задать вопрос">
+                        <button class="btn btn-secondary" type="button" disabled>Задать вопрос</button>
+                    </span>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -68,5 +89,7 @@
 
     <!-- Локальное подключение скриптов Bootstrap -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/ajax.js' %}"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

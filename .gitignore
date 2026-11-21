@@ -16,3 +16,5 @@ static/
 .env
 .env.docker
 .env.local
+
+media/

@@ -2,18 +2,34 @@
 {% load static %}
 
 {% block content %}
-    <!-- Только контент профиля -->
     <h2 class="mb-4">Настройки профиля</h2>
-    <form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
         <div class="row mb-3">
             <div class="col-md-2">
-                <!-- Картинка загружается через static -->
-                <img src="{% static 'img/avatar.png' %}" class="img-thumbnail" alt="Аватар">
+                {% if user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" class="img-thumbnail" alt="Аватар">
+                {% else %}
+                    <img src="{% static 'img/avatar.png' %}" class="img-thumbnail" alt="Аватар">
+                {% endif %}
             </div>
             <div class="col-md-10">
-                <input type="file" class="form-control mb-3">
-                <input type="text" class="form-control mb-3" value="pupkin_junior">
-                <input type="email" class="form-control mb-3" value="pupkin@mail.ru">
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
                 <button type="submit" class="btn btn-success">Сохранить</button>
             </div>
         </div>
